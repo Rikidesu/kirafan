@@ -90,14 +90,13 @@
                 width: 100%;
                 cursor: pointer;
             }
-
-
+            body div.rotate{
+                transform: rotate(-90deg);
+            }
 
         </style>
     </head>
-
     <body>
-
         <div class="content">
             <div class="loading">
                 <div class="dot-box">
@@ -107,18 +106,20 @@
                 </div>
             </div>
         </div>
-
         <div class="modal">
-            <div class="alert">
-                <div class="close" onclick=" (function(){ window.opener = '';window.close() }())"></div>
+            <div class="rotate-box">
+                <div class="alert">
+                    <div class="close" onclick=" (function(){ window.opener = '';window.close() }())"></div>
+                </div>
             </div>
         </div>
-
-
     </body>
 
     <script type="text/javascript">
+
         var dots = document.querySelectorAll(".dot");
+        var alertor = document.querySelector(".rotate-box");
+        var content = document.querySelector(".content");
         var times = 2;
         var fun = function(){
             times = ++times % 4;
@@ -140,8 +141,22 @@
         },233);
         setTimeout(function(){
             document.querySelector(".modal").classList.add("active")
-        },Math.random()*5000)
+        },Math.random()*4000+1000);
+
+        var browser_class = navigator.userAgent;
+        var browser_class_name1 = browser_class.match("Mobile");
+        var browser_class_name2 = browser_class.match("mobile");
+        var location_url = window.location.href;
+        if (browser_class_name1 != null || browser_class_name2 != null) {
+        } else {
+
+            alertor.classList.add('rotate');
+            content.classList.add('rotate');
+
+
+        }
 
     </script>
+    <script language="javascript" type="text/javascript" src="//js.users.51.la/19358373.js"></script>
 
 </html>

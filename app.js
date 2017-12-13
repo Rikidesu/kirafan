@@ -2,14 +2,17 @@
 * @Author: Rikiponzu*
 * @Date:   2017-12-13 15:54:49
 * @Last Modified by:   Rikiponzu*
-* @Last Modified time: 2017-12-13 16:00:18
+* @Last Modified time: 2017-12-13 16:21:36
 */
+
 const express = require('express')
 const http = require('http')
 const app = express()
 const fs = require('fs')
 const https = require('https')
 const URL = require('url')
+const http2 = require('spdy')
+const logger = require('morgan')
 
 const privateKey  = fs.readFileSync('/etc/letsencrypt/live/kirara.fun/privkey.pem', 'utf8');
 const certificate = fs.readFileSync('/etc/letsencrypt/live/kirara.fun/cert.pem', 'utf8');
@@ -47,9 +50,8 @@ process.on('uncaughtException', function(err) {
 
 app.use(express.static('./'));
 
-
 const httpServer = http.createServer(app);
-const httpsServer = https.createServer(credentials,app);
+const httpsServer = http2.createServer(credentials,app);
 
 
 const PORT = process.env.PORT || 80
